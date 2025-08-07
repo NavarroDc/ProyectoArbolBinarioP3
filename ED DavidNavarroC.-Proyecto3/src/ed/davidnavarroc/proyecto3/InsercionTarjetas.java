@@ -24,7 +24,23 @@ public class InsercionTarjetas extends javax.swing.JFrame {
     public InsercionTarjetas() {
         initComponents();
     }
+    
+    private boolean verificarVacios(String id, String descripcion){
+        boolean campoVacio = false;
 
+        if(id.isEmpty() || descripcion.isEmpty()){
+            campoVacio = true;
+        }
+        return campoVacio;
+    }
+    
+    private Integer convertirID(String id){
+        try{
+            return Integer.parseInt(id);
+        }catch(NumberFormatException e){
+            return null;
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -117,20 +133,46 @@ public class InsercionTarjetas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void idTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTarjetaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idTarjetaActionPerformed
 
     private void btnRegistrarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarTarjetaActionPerformed
         // TODO add your handling code here:
-        int id = Integer.parseInt(idTarjeta.getText());
-        String descripcion = descripcionTarjeta.getText();
+        String idIngresado = idTarjeta.getText().trim();
+        
+        if(idIngresado.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Debe ingresar todos los datos de la tarjeta...");
+            return;
+        }
+        
+        int id;
+        
+        try{
+        id = Integer.parseInt(idIngresado.trim());
+        
+        }catch(NumberFormatException e){
+        JOptionPane.showMessageDialog(this, "El ID debe ser un número entero...");
+        return;
+        }
+            
+        String descripcion = descripcionTarjeta.getText().trim();
+        
+        if(descripcion.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Debe ingresar todos los datos de la tarjeta...");
+        }
+        
         String categoria = categoriaTarjeta.getSelectedItem().toString();
         
         Tarjeta nuevaTarjeta = new Tarjeta(id, descripcion, categoria);
         
-        if(gestor.tarjetaInsertada(nuevaTarjeta) == false){
-            JOptionPane.showMessageDialog(this, "La tarjeta ya existe...");
+        if(!gestor.tarjetaInsertada(nuevaTarjeta)){
+            JOptionPane.showMessageDialog(this, "La tarjeta ya existe, debe ingresar otra...");
+        }else{
+            idTarjeta.setText("");
+            descripcionTarjeta.setText("");
+            categoriaTarjeta.setToolTipText("");
         }
     }//GEN-LAST:event_btnRegistrarTarjetaActionPerformed
 
