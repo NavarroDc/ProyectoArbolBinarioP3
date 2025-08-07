@@ -1,5 +1,7 @@
 package ed.davidnavarroc.proyecto3;
 
+import javax.swing.JOptionPane;
+
 public class Gestor {
     
     private Nodo nodoRaiz;
@@ -9,7 +11,7 @@ public class Gestor {
     }
 
     public Gestor(Nodo nodoRaiz) {
-        this.nodoRaiz = null;
+        this.nodoRaiz = nodoRaiz;
     }
     
     public boolean tarjetaInsertada(Tarjeta tarjeta){

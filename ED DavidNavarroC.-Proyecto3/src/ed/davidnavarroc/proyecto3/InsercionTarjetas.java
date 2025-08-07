@@ -4,6 +4,8 @@
  */
 package ed.davidnavarroc.proyecto3;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author angel
@@ -38,7 +40,8 @@ public class InsercionTarjetas extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         descripcionTarjeta = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        categoriaTarjeta = new javax.swing.JComboBox<>();
+        btnRegistrarTarjeta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,7 +59,14 @@ public class InsercionTarjetas extends javax.swing.JFrame {
 
         jLabel4.setText("Categoría de la tarjeta:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Civiles", "Equipos", "Súper héroes", "Objetos", "Súper villanos", "Paneles", "Cara a cara", "Frases icónicas", "Película especial" }));
+        categoriaTarjeta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Civiles", "Equipos", "Súper héroes", "Objetos", "Súper villanos", "Paneles", "Cara a cara", "Frases icónicas", "Película especial" }));
+
+        btnRegistrarTarjeta.setText("Registrar tarjeta");
+        btnRegistrarTarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarTarjetaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,20 +74,22 @@ public class InsercionTarjetas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(idTarjeta)
-                            .addComponent(descripcionTarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, 0, 181, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(idTarjeta)
+                                .addComponent(descripcionTarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addGap(18, 18, 18)
+                            .addComponent(categoriaTarjeta, 0, 181, Short.MAX_VALUE)))
+                    .addComponent(btnRegistrarTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(362, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -96,8 +108,10 @@ public class InsercionTarjetas extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(342, Short.MAX_VALUE))
+                    .addComponent(categoriaTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addComponent(btnRegistrarTarjeta)
+                .addContainerGap(280, Short.MAX_VALUE))
         );
 
         pack();
@@ -106,6 +120,19 @@ public class InsercionTarjetas extends javax.swing.JFrame {
     private void idTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTarjetaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idTarjetaActionPerformed
+
+    private void btnRegistrarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarTarjetaActionPerformed
+        // TODO add your handling code here:
+        int id = Integer.parseInt(idTarjeta.getText());
+        String descripcion = descripcionTarjeta.getText();
+        String categoria = categoriaTarjeta.getSelectedItem().toString();
+        
+        Tarjeta nuevaTarjeta = new Tarjeta(id, descripcion, categoria);
+        
+        if(gestor.tarjetaInsertada(nuevaTarjeta) == false){
+            JOptionPane.showMessageDialog(this, "La tarjeta ya existe...");
+        }
+    }//GEN-LAST:event_btnRegistrarTarjetaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,9 +160,10 @@ public class InsercionTarjetas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegistrarTarjeta;
+    private javax.swing.JComboBox<String> categoriaTarjeta;
     private javax.swing.JTextField descripcionTarjeta;
     private javax.swing.JTextField idTarjeta;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
