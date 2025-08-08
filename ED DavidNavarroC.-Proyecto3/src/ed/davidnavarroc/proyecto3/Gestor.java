@@ -70,4 +70,23 @@ public class Gestor {
     public void mostrarDatosConsola(){
         imprimirInOrden(nodoRaiz);
     }
+    
+    public void eliminarTarjeta(String idEliminar){
+        
+        Nodo nodoEliminar = nodoRaiz;
+        Nodo nodoPadre = null;
+    }
+    
+    public boolean idValido(String idIngresado){
+        if(idIngresado == null || idIngresado.trim().isEmpty()){
+            return false; //El ID está vacío
+        }
+        
+        try{
+            Integer.parseInt(idIngresado.trim());
+            return true;
+        }catch (NumberFormatException e){
+            return false;
+        }
+    }
 }
