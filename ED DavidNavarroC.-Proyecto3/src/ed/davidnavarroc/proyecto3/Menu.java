@@ -31,6 +31,7 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         btnInsercion = new javax.swing.JButton();
+        btnEliminarTarjetas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,6 +41,13 @@ public class Menu extends javax.swing.JFrame {
         btnInsercion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInsercionActionPerformed(evt);
+            }
+        });
+
+        btnEliminarTarjetas.setText("Eliminar tarjetas");
+        btnEliminarTarjetas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarTarjetasActionPerformed(evt);
             }
         });
 
@@ -54,7 +62,9 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(227, 227, 227)
-                        .addComponent(btnInsercion, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnInsercion, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                            .addComponent(btnEliminarTarjetas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(241, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -64,7 +74,9 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(37, 37, 37)
                 .addComponent(btnInsercion)
-                .addContainerGap(427, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnEliminarTarjetas)
+                .addContainerGap(382, Short.MAX_VALUE))
         );
 
         pack();
@@ -78,6 +90,14 @@ public class Menu extends javax.swing.JFrame {
         ventanaInsercionTarjetas.setLocationRelativeTo(null);
         
     }//GEN-LAST:event_btnInsercionActionPerformed
+
+    private void btnEliminarTarjetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTarjetasActionPerformed
+        // TODO add your handling code here:
+        EliminarTarjetas ventanaEliminarTarjetas = new EliminarTarjetas();
+        ventanaEliminarTarjetas.setVisible(true);
+        ventanaEliminarTarjetas.recibirGestor(gestor);
+        ventanaEliminarTarjetas.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnEliminarTarjetasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -105,6 +125,7 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEliminarTarjetas;
     private javax.swing.JButton btnInsercion;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
