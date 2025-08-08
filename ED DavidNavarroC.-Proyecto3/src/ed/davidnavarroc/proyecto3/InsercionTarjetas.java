@@ -133,17 +133,22 @@ public class InsercionTarjetas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     private void idTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTarjetaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idTarjetaActionPerformed
 
+    private void limpiarCampos(){
+        idTarjeta.setText("");
+        descripcionTarjeta.setText("");
+        categoriaTarjeta.setToolTipText("");
+    }
     private void btnRegistrarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarTarjetaActionPerformed
         // TODO add your handling code here:
         String idIngresado = idTarjeta.getText().trim();
         
         if(idIngresado.isEmpty()){
             JOptionPane.showMessageDialog(this, "Debe ingresar todos los datos de la tarjeta...");
+            limpiarCampos();
             return;
         }
         
@@ -161,6 +166,7 @@ public class InsercionTarjetas extends javax.swing.JFrame {
         
         if(descripcion.isEmpty()){
             JOptionPane.showMessageDialog(this, "Debe ingresar todos los datos de la tarjeta...");
+            return;
         }
         
         String categoria = categoriaTarjeta.getSelectedItem().toString();
@@ -170,10 +176,10 @@ public class InsercionTarjetas extends javax.swing.JFrame {
         if(!gestor.tarjetaInsertada(nuevaTarjeta)){
             JOptionPane.showMessageDialog(this, "La tarjeta ya existe, debe ingresar otra...");
         }else{
-            idTarjeta.setText("");
-            descripcionTarjeta.setText("");
-            categoriaTarjeta.setToolTipText("");
+            limpiarCampos();
         }
+        
+        gestor.mostrarDatosConsola();
     }//GEN-LAST:event_btnRegistrarTarjetaActionPerformed
 
     /**

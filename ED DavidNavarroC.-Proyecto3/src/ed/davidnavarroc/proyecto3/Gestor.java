@@ -56,4 +56,18 @@ public class Gestor {
             return buscarDatosTarjeta(nodoActual.nodoDerecho, id);
         }
     }
+    
+    private void imprimirInOrden(Nodo nodo){
+        if (nodo != null){
+            imprimirInOrden(nodo.nodoIzquierdo);
+            System.out.println("ID: " + nodo.tarjeta.getId() + 
+            " | Descripción: " + nodo.tarjeta.getDescripcion()
+            + " | Categoria: " + nodo.tarjeta.getCategoria()) ;
+            imprimirInOrden(nodo.nodoDerecho);
+        }
+    }
+    
+    public void mostrarDatosConsola(){
+        imprimirInOrden(nodoRaiz);
+    }
 }
