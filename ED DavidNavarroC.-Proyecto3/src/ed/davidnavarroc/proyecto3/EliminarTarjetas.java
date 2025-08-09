@@ -4,6 +4,8 @@
  */
 package ed.davidnavarroc.proyecto3;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author angel
@@ -42,6 +44,11 @@ public class EliminarTarjetas extends javax.swing.JFrame {
         jLabel1.setText("Escriba el número del ID de la tarjeta que va a eliminar");
 
         btnEliminarTarjeta.setText("Eliminar");
+        btnEliminarTarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarTarjetaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,6 +76,28 @@ public class EliminarTarjetas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEliminarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTarjetaActionPerformed
+        // TODO add your handling code here:
+        String idIngresado = idEliminar.getText().trim();
+        int idNum;
+        
+        if(idIngresado.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Debe ingresar un ID para eliminar...");
+            idEliminar.setText("");
+            return;
+        }
+        
+        try{
+            idNum = Integer.parseInt(idIngresado.trim());
+            
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "El ID debe ser un número entero...");
+            return;
+        }
+        
+        
+    }//GEN-LAST:event_btnEliminarTarjetaActionPerformed
 
     /**
      * @param args the command line arguments
